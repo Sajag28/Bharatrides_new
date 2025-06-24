@@ -111,7 +111,7 @@ export default function InspectionBookingPage() {
       <Box mb={2}>
         <TextField
           fullWidth
-          label="Car ID"
+          label="Vehicle No"
           variant="outlined"
           value={carId}
           onChange={(e) => setCarId(e.target.value)}

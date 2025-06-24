@@ -64,10 +64,11 @@ export default function CarsPage() {
     backgroundPosition: 'center',
     minHeight: '100vh',
     width: '100%',
-    padding: '2rem 0'
+    padding: '2rem 0',
+    scroll:'auto'
   }}>
     <Stack direction="column" spacing={2} sx={{ justifyContent: "center", alignItems: "center" }}>
-      <Container sx={{ py: 6 ,opacity:0.8}}>
+      <Container sx={{ py: 6 }}>
         <Typography variant="h4" gutterBottom align="center" fontWeight="bold">
           Cars You Listed So Far
         </Typography>
