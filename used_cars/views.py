@@ -112,7 +112,7 @@ class Userdata(APIView):
                                         aadhar_number=request.data.get("aadhar_number"))
      user_im= UserImage.objects.create(user=user, image=request.FILES.get("image"))
      return JsonResponse({"message": f"User {user.username} created successfully! with aadhar number {user_p.aadhar_number} and image {user_im.image.url}"})
- 
+     
  
 class CarListByUserView(ListAPIView):
     serializer_class = CarSerializer
@@ -270,8 +270,8 @@ class AvailableSlotsByCityDate(APIView):
         ])
         
 class UserProfileFromEmail(APIView):
-    def get(self, request):
-        email = request.query_params.get('email')
+    def get(self, request,email):
+        email = email
         if not email:
             return Response({'error': 'Email is required'}, status=status.HTTP_400_BAD_REQUEST)
         
@@ -293,3 +293,22 @@ class UserProfileFromEmail(APIView):
             return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
         except UserProfile.DoesNotExist:
             return Response({'error': 'User profile not found'}, status=status.HTTP_404_NOT_FOUND)
+class UserImageView(APIView):
+      def get(self, request,email):
+        email = email
+        if not email:
+            return Response({'error': 'Email is required'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            user = User.objects.get(email=email)
+            user_image = UserImage.objects.get(user=user)
+            
+            return Response({
+                'username': user.username,
+                'image_url': user_image.image.url if user_image.image else None,
+            })
+        except User.DoesNotExist:
+            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+        except UserImage.DoesNotExist:
+            return Response({'error': 'User image not found'}, status=status.HTTP_404_NOT_FOUND)
+        
