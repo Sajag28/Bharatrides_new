@@ -1,16 +1,78 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
+import {
+  Container,
+  Paper,
+  Grid,
+  TextField,
+  Button,
+  Typography,
+  Box,
+} from '@mui/material';
 import axios from 'axios';
-
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Stack from '@mui/material/Stack';
+import './upload.css'; 
+const theme = createTheme({
+  components: {
+    MuiStack: {
+      defaultProps: {
+        useFlexGap: true,
+      },
+    },
+  },
+});
+theme.typography.h2 = {
+  fontSize: '1.2rem',
+  '@media (min-width:600px)': {
+    fontSize: '2.2rem',
+  },
+  '@media (min-width:900px)': {
+    fontSize: '3.5rem',
+  },
+};
+theme.typography.h3 = {
+  fontSize: '1.2rem',
+  '@media (min-width:600px)': {
+    fontSize: '2.2rem',
+  },
+  '@media (min-width:900px)': {
+    fontSize: '3.5rem',
+  },
+};
 export default function UploadPage() {
-  const [title, setTitle] = useState('');
-  const [desc, setDesc] = useState('');
-  const [price, setPrice] = useState('');
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    title: '',
+    description: '',
+    price: '',
+    brand: '',
+    model: '',
+    variant: '',
+    car_no:'',
+    year: '',
+    fuel_type: '',
+    transmission: '',
+    engine_capacity: '',
+    mileage: '',
+    km_driven: 0,
+    number_of_owners: '',
+    insurance_validity: '',
+    rc_available: '',
+    city:'',
+    state: '',
+    pincode: '',
+  });
+
+
   const [images, setImages] = useState([]);
-  const [username, setUsername] = useState('');
- const [email, setEmail] = useState('');
- const [password, setPassword] = useState('');
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleImageChange = (e) => {
     setImages([...e.target.files]);
@@ -18,54 +80,154 @@ export default function UploadPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (images.length > 10) {
       alert('You can only upload up to 10 images.');
       return;
     }
 
-    const formData = new FormData();
-    formData.append('username', username);
-formData.append('email', email);
-formData.append('password', password);
-
-    formData.append('title', title);
-    formData.append('description', desc);
-    formData.append('price', price);
-    images.forEach((image) => {
-      formData.append('images', image);
+    const payload = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      payload.append(key, value);
     });
+    images.forEach((image) => payload.append('images', image));
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/used-cars/upload-car/', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-        withCredentials: true,
+      const res = await axios.post('http://127.0.0.1:8000/used-cars/upload-car/', payload, {
+        headers: { 'Content-Type': 'multipart/form-data' },
       });
-
       alert('Car uploaded successfully!');
-      console.log(response.data);
-    } catch (error) {
-      console.error('Upload failed:', error);
+      console.log(res.data);
+    } catch (err) {
+      console.error('Upload failed:', err);
       alert('Something went wrong!');
     }
   };
 
   return (
-    <div style={{ maxWidth: '500px', margin: 'auto', padding: '2rem' }}>
-      <h2>Upload Car</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required /><br />
-       <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required /><br />
-       <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required /><br />
+<div style={{
+      backgroundColor: '#87CEEB', // light grey background
+      minHeight: '100vh',
+      width: '100%',
+    }}>
+<div style={{
+  backgroundImage: `url('/blue_back.jpg')`, // path to image in public folder
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    minHeight: '100vh',   // ensures full viewport height
+    width: '100%',
+}}>
+  
+<Stack
+  direction="column"
+  spacing={0}
+  sx={{
+    justifyContent: "center",
+    alignItems: "center",
+  }}
+>
 
-        <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required /><br />
-        <textarea placeholder="Description" value={desc} onChange={(e) => setDesc(e.target.value)} required /><br />
-        <input type="number" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} required /><br />
-        <input type="file" multiple accept="image/*" onChange={handleImageChange} /><br />
-        <button type="submit">Submit</button>
-      </form>
+<Stack
+  direction="row"
+  spacing={2}
+  sx={{
+    justifyContent: "center",
+    alignItems: "flex-start",
+    
+  }}
+>
+<div style={{ width: '90vw', height: '80vh' ,marginTop:'0vh'}}>
+<img src="/car1.jpg" width="70%" height="80%"/>
+</div>
+</Stack>
+
+<Stack
+  direction="row"
+  spacing={2}
+  sx={{
+    justifyContent: "center",
+    alignItems: "center",
+    ml:5
+  }}
+>
+
+<Stack
+  direction="column"
+  spacing={2}
+  sx={{
+    justifyContent: "center",
+    alignItems: "flex-start",
+  }}
+>
+  <Typography variant="h2">Want to sell your old car?</Typography>
+  <Typography variant="h3">List it in our engine to get best deals</Typography>
+
+</Stack>
+<img src="/handshake.png" width="20%" height="20%"/>
+</Stack>
+<Stack
+  direction="row"
+  spacing={2}
+  sx={{
+    justifyContent: "flex-end",
+    alignItems: "center",
+    mt:10
+  }}
+>
+    <img src="/bharatrides.jpg" width="20%" height="20%" style={{ borderRadius: '12px' }} />
+    <Container maxWidth="md" sx={{ mb: 3,opacity:0.7 }}>
+      <Paper elevation={8} sx={{ p: 4, borderRadius: 5 }}>
+              <Typography variant="h5" align="center" gutterBottom>
+                Upload Car Details
+              </Typography>
+              <Box component="form" onSubmit={handleSubmit} encType="multipart/form-data">
+                <Grid container spacing={3}>
+                  {[
+                    ['username', 'Username'], ['email', 'Email', 'email'], ['password', 'Password', 'password'],
+                    ['title', 'Car Title'], ['description', 'Description', 'textarea'], ['price', 'Price (INR)', 'number'],
+                    ['brand', 'Brand'], ['model', 'Model'], ['variant', 'Variant'], ['car_no','Car No.','text'],['year', 'Manufacturing Year', 'number'],
+                    ['fuel_type', 'Fuel Type'], ['transmission', 'Transmission Type'],
+                    ['engine_capacity', 'Engine Capacity (cc)', 'number'],
+                    ['mileage', 'Mileage (km/l)', 'number'], ['kilometers_driven', 'Kilometers Driven', 'number'],
+                    ['number_of_owners', 'Number of Owners', 'number'],
+                    ['insurance_validity', 'Insurance Validity (YYYY-MM-DD)', 'date'],
+                    ['rc_available', 'RC Available (Yes/No)', 'text'],['city','City', 'text'], ['state', 'State', 'text'], ['pincode', 'Pincode', 'text']
+                  ].map(([name, label, type = 'text']) => (
+                    <Grid item xs={12} sm={name === 'description' ? 12 : 6} key={name}>
+                      <TextField
+                        fullWidth
+                        name={name}
+                        label={label}
+                        type={type}
+                        value={formData[name]}
+                        onChange={handleInputChange}
+                        required={name !== 'variant'} // you can adjust required fields
+                        multiline={name === 'description'}
+                        rows={name === 'description' ? 3 : undefined}
+                      />
+                    </Grid>
+                  ))}
+
+                  <Grid item xs={12}>
+                    <Button variant="outlined" component="label" fullWidth>
+                      Upload Images (Max 10)
+                      <input type="file" hidden multiple accept="image/*" onChange={handleImageChange} />
+                    </Button>
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <Button type="submit" variant="contained" fullWidth>
+                      Submit
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Paper>
+    </Container>
+    </Stack>
+    
+    </Stack>
+    </div>
     </div>
   );
 }
