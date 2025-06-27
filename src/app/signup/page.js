@@ -24,6 +24,8 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Vantabackground from '@/comp/Vantabackground'; 
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import Link from 'next/link';
+
 const theme = createTheme({
   components: {
     MuiStack: {
@@ -188,6 +190,7 @@ export default function SignupPage() {
             }
           />
         </FormControl>
+        <Link href="/login">Already have an account? Login here</Link>
         <Button variant="outlined" onClick={handleSignup}>Sign Up</Button>
 </Stack>
 </Stack>

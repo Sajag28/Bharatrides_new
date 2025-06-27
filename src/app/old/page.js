@@ -293,6 +293,11 @@ export default function old() {
               </Box>
             )}
             <CardContent>
+
+
+
+
+
               <Typography variant="h5" gutterBottom>{car.title} — ₹{car.price}</Typography>
               <Typography variant="body2" paragraph>{car.description}</Typography>
               <Typography><strong>Brand:</strong> {car.brand}</Typography>
@@ -301,6 +306,16 @@ export default function old() {
               <Typography><strong>Transmission:</strong> {car.transmission}</Typography>
               <Typography><strong>Mileage:</strong> {car.mileage_kmpl} km/l</Typography>
               <Typography><strong>Driven:</strong> {car.km_driven} km</Typography>
+          
+          
+
+   <Typography><strong>Seller</strong> {car.owner}</Typography>
+              <Typography><strong>Phone Number</strong> {car.phone_number} </Typography>
+              <Typography><strong>City</strong> {car.city} </Typography>
+               <Typography><strong>State</strong> {car.state}</Typography>
+             
+
+           
             </CardContent>
           </Card>
         ))}

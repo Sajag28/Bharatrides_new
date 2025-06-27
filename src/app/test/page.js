@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import {useRouter} from 'next/navigation';
 const theme = createTheme({
   components: {
     MuiStack: {
@@ -47,7 +47,7 @@ export default function Test() {
 
   const [responseMessage, setResponseMessage] = useState('');
   const [error, setError] = useState('');
-
+  const router = useRouter();
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === 'image') {
@@ -77,6 +77,8 @@ export default function Test() {
 
       if (res.ok) {
         setResponseMessage(`✅ ${data.message || 'User created successfully!'}`);
+        router.push('/dashboard'); // Redirect to login page after successful registration
+        
       } else {
         setError(data.error || 'Something went wrong');
       }

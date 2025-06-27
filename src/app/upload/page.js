@@ -14,6 +14,7 @@ import axios from 'axios';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import './upload.css'; 
+import { useRouter } from 'next/navigation';
 const theme = createTheme({
   components: {
     MuiStack: {
@@ -67,7 +68,7 @@ export default function UploadPage() {
     pincode: '',
   });
 
-
+  const router = useRouter();
   const [images, setImages] = useState([]);
 
   const handleInputChange = (e) => {
@@ -96,6 +97,7 @@ export default function UploadPage() {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       alert('Car uploaded successfully!');
+      router.push('/dashboard'); // Redirect to dashboard after successful upload
       console.log(res.data);
     } catch (err) {
       console.error('Upload failed:', err);

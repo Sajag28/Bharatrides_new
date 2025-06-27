@@ -83,7 +83,7 @@ export default function InspectionBookingPage() {
   };
 
   return (
-
+<>
 <Stack
   direction="column"
   spacing={2}
@@ -93,6 +93,41 @@ export default function InspectionBookingPage() {
   }}
 >
 
+<Stack
+  direction="row"
+  spacing={2}
+  sx={{
+    justifyContent: "space-between",
+    alignItems: "center",
+  }}
+>
+
+    <img src="/car_inpect.png" height="50%" width="60%"/>
+
+<Stack
+  direction="column"
+  spacing={2}
+  sx={{
+    justifyContent: "space-between",
+    alignItems: "center",
+  }}
+>
+
+    <Typography variant="h4">Not sure about your car quality? Schedule an inspection to know your call quality status</Typography>
+    <img src="/today.png" height="150px" width="150px"/>
+    <Typography variant="h5">Our Car Inspectors will be there and give you detailed quality check</Typography>
+    </Stack>
+    </Stack>
+      </Stack>
+  <div style={{backgroundColor: '#6CD2FE'}}>
+  <div  style={{
+    backgroundImage: `url("/blue_2.jpg")`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    width: '100%',
+    padding: '40px 0'
+  }}>
     <Container>
       <Typography variant="h4" gutterBottom>
         Book Your Car Inspection Slot
@@ -183,6 +218,8 @@ export default function InspectionBookingPage() {
         </Box>
       )}
     </Container>
-    </Stack>
+    </div>
+    </div>
+    </>
   );
 }

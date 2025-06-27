@@ -24,6 +24,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Vantabackground from '@/comp/Vantabackground'; 
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import Link from 'next/link';
 
 const theme = createTheme({
   components: {
@@ -160,7 +161,7 @@ export default function SignupPage() {
           />
         
         </FormControl>
-        
+        <Link href="/signup">New to our portal? Signup here now!</Link>
         <Button variant="outlined" onClick={handleLogin}>Login In</Button>
 </Stack>
 </Stack>

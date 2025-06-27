@@ -61,10 +61,13 @@ export default function Dashboard() {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleLogout = () => {
+    sessionStorage.removeItem('email');
+    router.push('/login');
+  };
   const handleClose = () => {
     setAnchorEl(null);
-  };
-
+  }
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -183,9 +186,8 @@ useEffect(() => {
               <Box>
                 <Button sx={{color:'#fafafa'}} onClick={handleMenuClick}>{email} ▾</Button>
                 <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>Settings</MenuItem>
-                  <MenuItem onClick={handleClose}>Log Out</MenuItem>
+                 
+                  <MenuItem onClick={handleLogout}>Log Out</MenuItem>
                 </Menu>
               </Box>
             </Box>
@@ -194,13 +196,14 @@ useEffect(() => {
 
         {/* Content */}
         <Toolbar />
-        <Container sx={{ py: 3 }}>
+        <Container sx={{ py: 3 ,mx:'auto'}}>
+       
           <ThemeProvider theme={theme}>
  
 
          
 
-  
+
 <Stack
   direction="column"
   spacing={2}
@@ -210,18 +213,38 @@ useEffect(() => {
     
   }}
 >
+
+<Stack
+  direction="row"
+  spacing={2}
+  sx={{
+    justifyContent: "space-between",
+    alignItems: "center",
+  }}
+>
+
   {/* New Car */}
  <Card sx={{ maxWidth: 700 }} onClick={() => router.push('/newcar')}>
       
       <CardContent>
+
+
+
         <DotLottieReact
       src="https://lottie.host/dd5bb5a3-9329-4fa9-8800-376853d85299/8BtzU9tKaI.lottie"
       loop
       autoplay
     />
+     <Typography variant="h5">Confuse which car to buy? Check out our suggestion system for clearing your confusion</Typography>
       </CardContent>
       
     </Card>
+    
+      
+     
+   
+      
+    </Stack>
 </Stack>
 <Stack
   direction="column"
@@ -237,21 +260,22 @@ useEffect(() => {
   
 <Card sx={{ maxWidth: 700 }} onClick={() => router.push('/old')}>
 
-
-<Stack
+<CardContent>
+{/* <Stack
   direction="row"
   spacing={2}
   sx={{
     justifyContent: "center",
     alignItems: "center",
   }}
->
+> */}
   <div style={{height:"100%" ,width:"100%"}}>
  {/* Used Car */}
  <img src="/used_car.png" style={{padding:'auto'}} height="300px" width="300px"/>
  </div>
-</Stack>
-
+{/* </Stack> */}
+<Typography variant="h5">New Driver or want to get an old car for practice? Check out amazing deals of the used cars here</Typography>
+</CardContent>
 
 </Card>
 
@@ -261,11 +285,32 @@ useEffect(() => {
 
 
           </ThemeProvider>
+    
+<Stack
+  direction="row"
+  spacing={0}
+  sx={{
+    justifyContent: "center",
+    alignItems: "center",
+  }}
+>
+   
+<Stack
+  direction="column"
+  spacing={2}
+  sx={{
+    justifyContent: "space-between",
+    alignItems: "center",
+  }}
+>
+
           <Stack direction="column" spacing={2} sx={{ justifyContent: "center", alignItems: "center"}}>
       <Container sx={{ py: 6 }}>
         <Typography variant="h4" gutterBottom align="center" fontWeight="bold">
           Cars You Listed So Far
         </Typography>
+      
+
 
         {loading ? (
           <Box display="flex" justifyContent="center" mt={4}>
@@ -278,7 +323,7 @@ useEffect(() => {
         ) : (
           <Stack direction="column" sx={{ justifyContent: 'center', alignItems: 'center' }} spacing={3}>
             {cars.map((car) => (
-              <Card key={car.id} sx={{ width: '50%', borderRadius: 3 }}>
+              <Card key={car.id} sx={{ width: '70%', borderRadius: 3 }}>
                 
 
                 <CardContent style={{cursor:'pointer'}}onClick={()=>{router.push('/cars')}}>
@@ -316,7 +361,9 @@ useEffect(() => {
   }}
 >
      <img src="/vehicle_sell.jpg" width="100%" height="100%"/>
+     
      </Stack>
+     <Typography variant="h5">Want to sell your car? List here in our platform </Typography>
     </CardContent>
   </Card>
   <Card style={{width:"50%"}} sx={{ maxWidth: 700 }} onClick={() => router.push('/inspection')}>
@@ -331,9 +378,16 @@ useEffect(() => {
 >
      <img src="/car_inspection.png" width="100%" height="100%"/>
      </Stack>
+     <Typography variant="h5">Want to get your car inspected? Book an appointment here</Typography>
     </CardContent>
   </Card>
+  
 </Stack>
+
+</Stack>
+<img src="/side_car.png" height="600px" width="400px"/>
+</Stack>
+
         </Container>
 
         {/* Footer */}
@@ -343,7 +397,9 @@ useEffect(() => {
           </Typography>
         </Box>
       </Box>
+      
     </Box>
 
   );
 }
+
