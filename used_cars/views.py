@@ -159,6 +159,7 @@ class SearchCarsView(APIView):
         }
         for car in cars
         ]
+        print(data)
         return JsonResponse(data, safe=False) 
     
 def create_standard_timeslots(request):

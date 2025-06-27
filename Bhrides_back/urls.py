@@ -18,10 +18,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from used_cars import urls as used_cars_urls
+from new_cars import urls as new_cars_urls
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("used-cars/", include(used_cars_urls)),  # Include the used_cars app URLs
+    path("used-cars/", include(used_cars_urls)),
+    path("new-cars/",include(new_cars_urls))# Include the used_cars app URLs
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
