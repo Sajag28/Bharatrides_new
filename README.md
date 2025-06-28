@@ -61,11 +61,11 @@ Future scope includes more advanced ML models for better recommendations.
 
 Firebase Authentication handles user login/signup securely.
 Protected routes are managed on the frontend with token checks.
-👥 Contributors
+### 👥 Contributors
 
--Sajag Agrawal –  Integration of Frontend + Backend + Django Models + Inspection Booking + Data Structuring
--Manul Rastogi –  Machine Learning Models + Data Structuring
--Asad Aziz – Frontend + UI/UX Design
+- Sajag Agrawal–Integration of Frontend + Backend + Django Models + Inspection Booking + Data Structuring
+- Manul Rastogi–Machine Learning Models + Data Structuring
+- Asad Aziz–Frontend + UI/UX Design
 🤝 Contributing
 
 Pull requests are welcome! For major changes, please open an issue first to discuss what you'd like to change.
